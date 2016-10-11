@@ -6,7 +6,8 @@
   "scripts": {
     "start": "webpack-dev-server --hot --inline",
     "build": "webpack",
-    "test": "mocha"
+    "test": "mocha",
+    "lint": "eslint lib/*.js"
   },
   "repository": {
     "type": "git",
@@ -23,6 +24,8 @@
     "babel-loader": "^6.2.5",
     "chai": "^3.5.0",
     "css-loader": "^0.25.0",
+    "eslint": "^3.7.1",
+    "eslint-plugin-react": "^6.4.1",
     "mocha": "^3.1.2",
     "mocha-loader": "^1.0.0",
     "node-sass": "^3.10.1",
