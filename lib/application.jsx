@@ -8,9 +8,9 @@ class Application extends React.Component {
     this.state = {location: ''};
   }
   searchData(e){
-    e.preventDefault();
+    // e.preventDefault();
     $.get(this.props.source + this.state.location, function(){
-      console.log(this.setState);
+      console.log(this.state);
     });
   };
 
