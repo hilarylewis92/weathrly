@@ -8,12 +8,22 @@ const ReactDOM = require('react-dom');
 class InputForm extends React.Component {
   render(){
     return (
-      <div>
-        <h1 className="title"> Weathrly App! </h1>
-          <input className="input-field" placeholder="Enter Location"/>
-
-          <button id="submit-btn"> Submit </button>
-      </div>
+      <section>
+        <article>
+          <h1 className="title"> Weathrly App! </h1>
+            <input className="input-field" placeholder="Enter Location"/>
+            <input className="input-field" placeholder="Enter Date"/>
+            <button id="submit-btn"> Submit </button>
+        </article>
+        <article>
+          <span id="city"> City </span>
+          <span id="weather"> Weather Type </span>
+          <article>
+            <img src="#"/>
+            <span id="temperature"> Temp </span>
+          </article>
+        </article>
+      </section>
     )
   }
 }
