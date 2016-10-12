@@ -1,16 +1,17 @@
-require('./api-scripts')
+const $ = require('jquery');
 const React = require('react');
 const ReactDOM = require('react-dom');
 
 class Application extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      date: "",
-      location: ""
-    };
+    this.state = {location: ''};
   }
-  searchData(){
+  searchData(e){
+    e.preventDefault();
+    $.get(this.props.source + this.state.location, function(){
+      console.log(this.setState);
+    });
   };
 
   render(){
@@ -18,12 +19,11 @@ class Application extends React.Component {
       <section>
         <article>
           <h1 className="title"> Weathrly App! </h1>
-            <input className="input-field" placeholder="Enter Location" onChange={this.setState.location}/>
-            <input className="input-field" placeholder="Enter Date" onChange={this.setState.date}/>
+            <input className="input-field" placeholder="Enter Location" value={this.state.location} onChange={(e)=>this.setState({location: e.target.value})}/>
             <button id="submit-btn" onClick={() => this.searchData()}> Submit </button>
         </article>
         <article>
-          <span id="city"> City </span>
+          <span id="city"> {this.state.location} </span>
           <span id="weather"> Weather Type </span>
           <article>
             <img src="#"/>
@@ -35,6 +35,6 @@ class Application extends React.Component {
   }
 }
 
-ReactDOM.render(<Application />, document.getElementById('app'));
+ReactDOM.render(<Application source='https://weatherly-api.herokuapp.com/api/weather/'/>, document.getElementById('app'));
 
 module.exports = Application
