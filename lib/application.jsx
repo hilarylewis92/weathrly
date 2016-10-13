@@ -10,11 +10,12 @@ class Application extends React.Component {
   }
   searchData(e){
     e.preventDefault();
-    $.get(this.props.source + this.state.location, function(result){
-      this.setState({
-        info: result
+    $.get(this.props.source + this.state.location, function(data){
+      console.log(data);
+      // this.setState({
+      //   // location: result
       });
-    }.bind(this));
+    // }.bind(this));
   }
 
   render(){
