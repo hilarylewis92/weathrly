@@ -1,6 +1,7 @@
 const $ = require('jquery');
 const React = require('react');
 const ReactDOM = require('react-dom');
+require('./styles');
 
 class Application extends React.Component {
   constructor(props) {
@@ -8,27 +9,25 @@ class Application extends React.Component {
     this.state = {location: ''};
   }
   searchData(e){
-    // e.preventDefault();
+    e.preventDefault();
     $.get(this.props.source + this.state.location, function(){
       console.log(this.state);
-    });
-  };
+    }.bind(this));
+  }
 
   render(){
     return (
       <section>
-        <article>
-          <h1 className="title"> Weathrly App! </h1>
+        <article id="input-form">
+          <h1 className="title"> Weathrly </h1>
             <input className="input-field" placeholder="Enter Location" value={this.state.location} onChange={(e)=>this.setState({location: e.target.value})}/>
-            <button id="submit-btn" onClick={() => this.searchData()}> Submit </button>
+            <button id="submit-btn" onClick={(e) => this.searchData(e)}> Submit </button>
         </article>
-        <article>
+        <article id="weather-display">
           <span id="city"> {this.state.location} </span>
+          <span id="temperature"> Temp </span>
           <span id="weather"> Weather Type </span>
-          <article>
             <img src="#"/>
-            <span id="temperature"> Temp </span>
-          </article>
         </article>
       </section>
     )
