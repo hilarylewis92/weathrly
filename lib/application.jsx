@@ -12,6 +12,10 @@ class Application extends React.Component {
     };
   }
 
+  updateInputValueInState(e){
+    this.setState({location: e.target.value});
+  }
+
   searchData(e){
     e.preventDefault();
     $.get(this.props.source + this.state.location, function(data){
@@ -27,8 +31,8 @@ class Application extends React.Component {
       <section>
         <article id="input-form">
           <h1 className="title"> {this.props.title} </h1>
-          <input className="input-field" placeholder="Enter Location" value={this.state.location} onChange={(e)=>this.setState({location: e.target.value})}/>
-          <button id="submit-btn" onClick={(e) => this.searchData(e)}> Submit </button>
+          <input className="input-field" type='text' placeholder="Enter Location" value={this.state.location} onChange={this.updateInputValueInState.bind(this)}/>
+          <input id="submit-btn" type='submit' onClick={this.searchData.bind(this)} />
         </article>
 
         <article id="weather-display">
