@@ -17,13 +17,14 @@ class Application extends React.Component {
   }
 
   searchData(e){
+
     e.preventDefault();
     $.get(this.props.source + this.state.location, function(data){
+      console.log(data)
       this.setState({
-        location: '',
-        temperature: ''
+        info: data
       });
-    });
+    }.bind(this));
   }
 
   render(){
