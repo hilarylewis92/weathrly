@@ -34,16 +34,21 @@ class Application extends React.Component {
           <input className="input-field" type='text' placeholder="Enter Location" value={this.state.location} onChange={this.updateInputValueInState.bind(this)}/>
           <input id="submit-btn" type='submit' onClick={this.searchData.bind(this)} />
         </article>
-
-        <article id="weather-display">
-          <span id="city"> {this.state.location} </span>
-          <span id="temperature"> Temp </span>
-          <span id="weather"> Weather Type </span>
-          <img src="#"/>
-        </article>
       </section>
     );
   }
+}
+
+const Weather = ({location, temperature, type, chance})=> {
+  return(
+    <article id="weather-display">
+      <span id="city">{this.state.location}</span>
+      <span id="temperature"> Temp </span>
+      <span id="weather"> Weather Type </span>
+      <span id="chance"> Weather Type </span>
+      <img src="#"/>
+    </article>
+  );
 }
 
 ReactDOM.render(<Application title='Weathrly App' source='https://weatherly-api.herokuapp.com/api/weather/'/>, document.getElementById('app'));
