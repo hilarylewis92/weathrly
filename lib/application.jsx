@@ -1,42 +1,57 @@
 const $ = require('jquery');
 const React = require('react');
 const ReactDOM = require('react-dom');
-require('./styles');
+
 
 class Application extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {location: 'Location'};
+  constructor() {
+    super();
+    this.state = {
+      location: '',
+      temperature: ''
+    };
   }
+
+  updateInputValueInState(e){
+    this.setState({location: e.target.value});
+  }
+
   searchData(e){
+
     e.preventDefault();
     $.get(this.props.source + this.state.location, function(data){
-      console.log(data);
-      // this.setState({
-      //   // location: result
+      console.log(data)
+      this.setState({
+        info: data
       });
-    // }.bind(this));
+    }.bind(this));
   }
 
   render(){
     return (
       <section>
         <article id="input-form">
-          <h1 className="title"> Weathrly </h1>
-            <input className="input-field" placeholder="Enter Location" value={this.state.location} onChange={(e)=>this.setState({location: e.target.value})}/>
-            <button id="submit-btn" onClick={(e) => this.searchData(e)}> Submit </button>
-        </article>
-        <article id="weather-display">
-          <span id="city"> {this.state.location} </span>
-          <span id="temperature"> Temp </span>
-          <span id="weather"> Weather Type </span>
-            <img src="#"/>
+          <h1 className="title"> {this.props.title} </h1>
+          <input className="input-field" type='text' placeholder="Enter Location" value={this.state.location} onChange={this.updateInputValueInState.bind(this)}/>
+          <input id="submit-btn" type='submit' onClick={this.searchData.bind(this)} />
         </article>
       </section>
-    )
+    );
   }
 }
 
-ReactDOM.render(<Application source='https://weatherly-api.herokuapp.com/api/weather/'/>, document.getElementById('app'));
+const Weather = ({location, temperature, type, chance})=> {
+  return(
+    <article id="weather-display">
+      <span id="city">{this.state.location}</span>
+      <span id="temperature"> Temp </span>
+      <span id="weather"> Weather Type </span>
+      <span id="chance"> Weather Type </span>
+      <img src="#"/>
+    </article>
+  );
+}
+
+ReactDOM.render(<Application title='Weathrly App' source='https://weatherly-api.herokuapp.com/api/weather/'/>, document.getElementById('app'));
 
 module.exports = Application
