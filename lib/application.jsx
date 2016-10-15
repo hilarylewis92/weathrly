@@ -7,69 +7,59 @@ class Application extends React.Component {
   constructor() {
     super();
     this.state = {
-      weather: []
+      weather: [],
+      location: ''
     };
   }
 
 componentDidMount() {
-  //if local storage exists else don't do anything
-  var storedData = JSON.parse(localStorage.getItem('key'));
-  this.setState ({ weather: storedData});
+  if(localStorage.key){
+    var storedData = JSON.parse(localStorage.getItem('key'));
+    this.setState ({ weather: storedData});
+  }else{
+    this.setState ({ weather: []});
+    }
   }
 
   updateInputValueInState(e){
       this.setState({location: e.target.value});
    }
 
-  getAPIData(e){
-    e.preventDefault();
+  getAPIData(){
     $.get(this.props.source + this.state.location, function(data){
       console.log(data);
-      // for (var i = 0; i < data.length; i++) {
       this.setState({
-        weather: data, //only have this
-        weekday: data[0],
-        location: data[0].location,
-        temphigh: data[0].temp.high,
-        templow: data[0].temp.low,
-        weathertype: data[0].weatherType.type,
-        chance: data[0].weatherType.chance
-      },
-      localStorage.setItem('key', JSON.stringify(data))
-    );
-      // }
+        weather: data,
+      },localStorage.setItem('key', JSON.stringify(data)));
     }.bind(this));
   }
-
   render(){
     return (
       <section>
         <article id="input-form">
           <h1 className="title"> {this.props.title} </h1>
-          <input className="input-field" type='text' placeholder="Enter Location" value={this.state.location} onChange={this.updateInputValueInState.bind(this)}/>
-          <input id="submit-btn" type='submit' onClick={this.getAPIData.bind(this)} />
+          <input className="input-field" type="text" placeholder="Enter Location" value={this.state.location} onChange={(e)=>this.updateInputValueInState(e)}/>
+          <button id="submit-btn" children="submit" onClick={this.getAPIData.bind(this)} />
         </article>
-        <WeatherDisplay weekInfo={this.state.weather} //just pass prop of data temperatureHigh={this.state.temphigh} temperatureLow={this.state.templow} locationInfo={this.state.location} weatherType={this.state.weathertype} weatherChance={this.state.chance}/>
+        <WeatherDisplay weekInfo={this.state.weather} />
       </section>
     );
   }
 }
 
 class WeatherDisplay extends React.Component {
-  render() {
-  return(
-    <article id="weather-display">
-      <span id="city"> {this.props.locationInfo} </span>
-      <span className="temperature"> High: {this.props.temperatureHigh} </span>
-      <span className="temperature"> Low: {this.props.temperatureLow} </span>
-      <span id="weather-type"> {this.props.weatherType}</span>
-      <span id="chance"> {this.props.weatherChance}</span>
-      <img src="../images/Sunny.png"/>
-    </article>
+  render(){
+    let weatherInfo = this.props.weekInfo
+    return(
+      <div>
+      {
+        weatherInfo.length ? weatherInfo.map(weatherDay=>{
+          return <p>{weatherDay.location}</p>
+        })
+        : null}
+      </div>
     );
   }
-
-  //write for loop, break out data array
 }
 
 ReactDOM.render(<Application title='Weathrly App' source='https://weatherly-api.herokuapp.com/api/weather/'/>, document.getElementById('app'));
