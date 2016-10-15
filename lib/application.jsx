@@ -7,9 +7,13 @@ class Application extends React.Component {
   constructor() {
     super();
     this.state = {
-      weather: [],
-      location: ''
+      weather: []
     };
+  }
+
+  componentDidMount() {
+    const data = JSON.parse(localStorage.getItem('data'));
+    this.setState({weather: data ? weather: [] });
   }
 
   updateInputValueInState(e){
@@ -29,7 +33,9 @@ class Application extends React.Component {
         templow: data[0].temp.low,
         weathertype: data[0].weatherType.type,
         chance: data[0].weatherType.chance
-      });
+      },
+      () => localStorage.setItem('data', JSON.stringify(data))
+    );
       // }
     }.bind(this));
   }
