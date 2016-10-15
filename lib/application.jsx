@@ -54,7 +54,10 @@ class WeatherDisplay extends React.Component {
       <div>
       {
         weatherInfo.length ? weatherInfo.map(weatherDay=>{
-          return <p>{weatherDay.location}</p>
+          return <div key={weatherDay.date}>
+            <p>{weatherDay.location}</p>
+            <p>{weatherDay.temp.high}</p>
+          </div>
         })
         : null}
       </div>
