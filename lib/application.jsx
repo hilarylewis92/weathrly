@@ -55,10 +55,10 @@ class WeatherDisplay extends React.Component {
       <span className="temperature"> Low: {this.props.temperatureLow} </span>
       <span id="weather-type"> {this.props.weatherType}</span>
       <span id="chance"> {this.props.weatherChance}</span>
-      <img src="#"/>
+      <img src="../images/Sunny.png"/>
     </article>
-  );
-}
+    );
+  }
 }
 
 ReactDOM.render(<Application title='Weathrly App' source='https://weatherly-api.herokuapp.com/api/weather/'/>, document.getElementById('app'));
