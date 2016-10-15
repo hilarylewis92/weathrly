@@ -57,6 +57,9 @@ class WeatherDisplay extends React.Component {
           return <div key={weatherDay.date}>
             <p>{weatherDay.location}</p>
             <p>{weatherDay.temp.high}</p>
+            <p>{weatherDay.temp.low}</p>
+            <p>{weatherDay.weatherType.type}</p>
+            <p>{weatherDay.weatherType.chance}</p>
           </div>
         })
         : null}
