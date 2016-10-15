@@ -11,9 +11,10 @@ class Application extends React.Component {
     };
   }
 
-  componentDidMount() {
-    const data = JSON.parse(localStorage.getItem('data'));
-    this.setState({weather: data ? weather: [] });
+componentDidMount() {
+  //if local storage exists else don't do anything
+  var storedData = JSON.parse(localStorage.getItem('key'));
+  this.setState ({ weather: storedData});
   }
 
   updateInputValueInState(e){
@@ -26,7 +27,7 @@ class Application extends React.Component {
       console.log(data);
       // for (var i = 0; i < data.length; i++) {
       this.setState({
-        weather: data,
+        weather: data, //only have this
         weekday: data[0],
         location: data[0].location,
         temphigh: data[0].temp.high,
@@ -34,7 +35,7 @@ class Application extends React.Component {
         weathertype: data[0].weatherType.type,
         chance: data[0].weatherType.chance
       },
-      () => localStorage.setItem('data', JSON.stringify(data))
+      localStorage.setItem('key', JSON.stringify(data))
     );
       // }
     }.bind(this));
@@ -48,7 +49,7 @@ class Application extends React.Component {
           <input className="input-field" type='text' placeholder="Enter Location" value={this.state.location} onChange={this.updateInputValueInState.bind(this)}/>
           <input id="submit-btn" type='submit' onClick={this.getAPIData.bind(this)} />
         </article>
-        <WeatherDisplay weekInfo={this.state.weather} temperatureHigh={this.state.temphigh} temperatureLow={this.state.templow} locationInfo={this.state.location} weatherType={this.state.weathertype} weatherChance={this.state.chance}/>
+        <WeatherDisplay weekInfo={this.state.weather} //just pass prop of data temperatureHigh={this.state.temphigh} temperatureLow={this.state.templow} locationInfo={this.state.location} weatherType={this.state.weathertype} weatherChance={this.state.chance}/>
       </section>
     );
   }
@@ -67,6 +68,8 @@ class WeatherDisplay extends React.Component {
     </article>
     );
   }
+
+  //write for loop, break out data array
 }
 
 ReactDOM.render(<Application title='Weathrly App' source='https://weatherly-api.herokuapp.com/api/weather/'/>, document.getElementById('app'));
