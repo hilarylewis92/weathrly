@@ -20,6 +20,7 @@ class Application extends React.Component {
     e.preventDefault();
     $.get(this.props.source + this.state.location, function(data){
       console.log(data);
+      // for (var i = 0; i < data.length; i++) {
       this.setState({
         weather: data,
         weekday: data[0],
@@ -29,6 +30,7 @@ class Application extends React.Component {
         weathertype: data[0].weatherType.type,
         chance: data[0].weatherType.chance
       });
+      // }
     }.bind(this));
   }
 
@@ -37,7 +39,7 @@ class Application extends React.Component {
       <section>
         <article id="input-form">
           <h1 className="title"> {this.props.title} </h1>
-          <input className="input-field" type='text' placeholder="Enter Location" value={this.state.location} onChange={(e)=>this.setState({location: e.target.value})}/>
+          <input className="input-field" type='text' placeholder="Enter Location" value={this.state.location} onChange={this.updateInputValueInState.bind(this)}/>
           <input id="submit-btn" type='submit' onClick={this.getAPIData.bind(this)} />
         </article>
         <WeatherDisplay weekInfo={this.state.weather} temperatureHigh={this.state.temphigh} temperatureLow={this.state.templow} locationInfo={this.state.location} weatherType={this.state.weathertype} weatherChance={this.state.chance}/>
