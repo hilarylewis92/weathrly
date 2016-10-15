@@ -7,22 +7,22 @@ class Application extends React.Component {
   constructor() {
     super();
     this.state = {
-      location: '',
-      temperature: ''
+      weather: [],
     };
   }
 
-  updateInputValueInState(e){
-    this.setState({location: e.target.value});
-  }
-
-  searchData(e){
-
+  getAPIData(e){
     e.preventDefault();
-    $.get(this.props.source + this.state.location, function(data){
-      console.log(data)
+    $.get(this.props.source, function(data){
+      console.log(data);
       this.setState({
-        info: data
+        weather: data,
+        weekday: data[0],
+        location: data[0].location,
+        temphigh: data[0].temp.high,
+        templow: data[0].temp.low,
+        weathertype: data[0].weatherType.type,
+        chance: data[0].weatherType.chance
       });
     }.bind(this));
   }
@@ -32,26 +32,30 @@ class Application extends React.Component {
       <section>
         <article id="input-form">
           <h1 className="title"> {this.props.title} </h1>
-          <input className="input-field" type='text' placeholder="Enter Location" value={this.state.location} onChange={this.updateInputValueInState.bind(this)}/>
-          <input id="submit-btn" type='submit' onClick={this.searchData.bind(this)} />
+          <input className="input-field" type='text' placeholder="Enter Location"/>
+          <input id="submit-btn" type='submit' onClick={this.getAPIData.bind(this)} />
         </article>
+        <WeatherDisplay weekInfo={this.state.weather} temperatureHigh={this.state.temphigh} temperatureLow={this.state.templow} locationInfo={this.state.location} weatherType={this.state.weathertype} weatherChance={this.state.chance}/>
       </section>
     );
   }
 }
 
-const Weather = ({location, temperature, type, chance})=> {
+class WeatherDisplay extends React.Component {
+  render() {
   return(
     <article id="weather-display">
-      <span id="city">{this.state.location}</span>
-      <span id="temperature"> Temp </span>
-      <span id="weather"> Weather Type </span>
-      <span id="chance"> Weather Type </span>
+      <span id="city"> {this.props.locationInfo} </span>
+      <span className="temperature"> High: {this.props.temperatureHigh} </span>
+      <span className="temperature"> Low: {this.props.temperatureLow} </span>
+      <span id="weather-type"> {this.props.weatherType}</span>
+      <span id="chance"> {this.props.weatherChance}</span>
       <img src="#"/>
     </article>
   );
 }
+}
 
-ReactDOM.render(<Application title='Weathrly App' source='https://weatherly-api.herokuapp.com/api/weather/'/>, document.getElementById('app'));
+ReactDOM.render(<Application title='Weathrly App' source='https://weatherly-api.herokuapp.com/api/weather/denver'/>, document.getElementById('app'));
 
 module.exports = Application
