@@ -49,13 +49,14 @@ componentDidMount() {
 
 class WeatherDisplay extends React.Component {
   render(){
+    debugger
     let weatherInfo = this.props.weekInfo
     return(
       <div>
       {
         weatherInfo.length ? weatherInfo.map(weatherDay=>{
           return (
-            <article key={weatherDay.date}>
+            <article className="weather-day" key={weatherDay.date}>
               <p>{weatherDay.location}</p>
               <p>{weatherDay.temp.high}</p>
               <p>{weatherDay.temp.low}</p>
