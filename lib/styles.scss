@@ -4,7 +4,7 @@
 
 body {
   color: $primary-text-color;
-  background-color: grey;
+  background-color: #8e44ad;
   font-family: 'Open Sans', sans-serif;
 }
 
@@ -17,8 +17,21 @@ body {
     padding-right: 20px;
 }
 
-.input-field{
-  margin: 20px;
+input {
+  margin-top: 20px;
+  width: 250px;
+  height: 40px;
+  font-size: 20px;
+}
+
+button {
+  width: 75px;
+  height: 40px;
+  font-size: 20px;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  margin-left: 20px;
 }
 
 h1 {
@@ -30,32 +43,61 @@ h1 {
   font-size: 50px;
 }
 
+h2{
+  padding: 20px;
+  font-size: 30px;
+  width: 300px;
+  margin: auto;
+}
+
 #weather-display {
   height: 500px;
   width: 100%;
-  margin-left: 35%;
-}
-
-#city {
-  margin-top: 3%;
-  margin-bottom: 2%;
-  font-size: 40px;
-  display: inline-block;
-}
-
-#weather{
-  display: block;
-  font-size: 25px;
-  margin-bottom: 2%;
-}
-
-#temperature {
-  margin-left: 12%;
-  font-size: 40px;
 }
 
 .weather-day{
   display: inline-block;
   margin: 20px;
   border: solid 2px white;
+}
+
+.windy {
+  background-color: $windy-color;
+  padding: 10px;
+}
+
+.sunny{
+  background-color: $sunny-color;
+  padding: 10px;
+}
+
+.rain {
+  background-color: $rain-color;
+  padding: 10px;
+}
+
+.cloudy{
+  background-color: $cloudy-color;
+  padding: 10px;
+}
+
+.snow {
+  background-color: $snow-color;
+  color: #2c3e50;
+  padding: 10px;
+}
+
+.thunder {
+  background-color: $thunder-color;
+  padding: 10px;
+}
+
+.location {
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.weather-type {
+  text-transform: capitalize;
+  margin-top: 5px;
 }
