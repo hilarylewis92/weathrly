@@ -4,8 +4,8 @@ const Application = require('../lib/application');
 
 import {shallow, mount, render} from 'enzyme';
 
-describe('our test bundle', function () {
-  it('should work', function () {
-    assert(true);
-  });
-});
+// describe('our test bundle', function () {
+//   it('should work', function () {
+//     assert(true);
+//   });
+// });
