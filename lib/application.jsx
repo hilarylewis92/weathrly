@@ -70,11 +70,11 @@ class WeatherDisplay extends React.Component {
                   <p>Low: {weatherDay.temp.low}&deg; </p>
                   <p className="weather-type">{weatherDay.weatherType.type}</p>
                   <p>Chance: {Math.round(weatherDay.weatherType.chance*100)}%</p>
-                  <img src='#' className={weatherDay.weatherType.type}/>
+                  <p className={weatherDay.weatherType.type}></p>
               </div>
             </article>
           )
-        }).slice(0,7)
+        }).slice(0, 7)
         : null}
       </div>
     );

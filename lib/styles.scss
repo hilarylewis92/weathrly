@@ -70,22 +70,35 @@ h2{
   padding: 10px;
 }
 
+p.windy {
+  background-image: url('../images/windy.svg');
+  background-repeat: no-repeat;
+  height: 220px;
+  width: 220px;
+}
+
 .sunny{
   background-color: $sunny-color;
   padding: 10px;
 }
 
+p.sunny {
+  background-image: url('../images/sunny.svg');
+  background-repeat: no-repeat;
+  height: 220px;
+  width: 220px;
+}
 
 .rain {
   background-color: $rain-color;
   padding: 10px;
 }
 
-article.rain {
-  background: url('../images/rain.png');
+p.rain {
+  background-image: url('../images/rain.svg');
   background-repeat: no-repeat;
-  height: 50px;
-  width: 50px;
+  height: 220px;
+  width: 220px;
 }
 
 .cloudy{
@@ -93,15 +106,37 @@ article.rain {
   padding: 10px;
 }
 
+p.cloudy {
+  background-image: url('../images/cloudy.svg');
+  background-repeat: no-repeat;
+  height: 220px;
+  width: 220px;
+}
+
+
 .snow {
   background-color: $snow-color;
   color: #2c3e50;
   padding: 10px;
 }
 
+p.snow {
+  background-image: url('../images/snow.svg');
+  background-repeat: no-repeat;
+  height: 220px;
+  width: 220px;
+}
+
 .thunder {
   background-color: $thunder-color;
   padding: 10px;
+}
+
+p.thunder {
+  background-image: url('../images/thunder.svg');
+  background-repeat: no-repeat;
+  height: 220px;
+  width: 220px;
 }
 
 .location {
