@@ -70,7 +70,7 @@ class WeatherDisplay extends React.Component {
               </div>
             </article>
           )
-        })
+        }).slice(0,7)
         : null}
       </div>
     );
