@@ -101,12 +101,16 @@
 	  }, {
 	    key: 'getAPIData',
 	    value: function getAPIData() {
-	      $.get(this.props.source + this.state.location, function (data) {
-	        console.log(data);
-	        this.setState({
-	          weather: data
-	        }, localStorage.setItem('key', JSON.stringify(data)));
-	      }.bind(this));
+	      if (this.state.location === 'denver' || this.state.location === 'san-diego' || this.state.location === 'san-fransico' || this.state.location === 'castle-rock') {
+	        $.get(this.props.source + this.state.location, function (data) {
+	          console.log(data);
+	          this.setState({
+	            weather: data
+	          }, localStorage.setItem('key', JSON.stringify(data)));
+	        }.bind(this));
+	      } else {
+	        alert('This is not a valid location. Please enter one of the following locations: (denver, san-diego, san-fransico, or castle-rock)');
+	      }
 	    }
 	  }, {
 	    key: 'render',
@@ -131,7 +135,16 @@
 	            } }),
 	          React.createElement('button', { id: 'submit-btn', children: 'submit', onClick: this.getAPIData.bind(this) })
 	        ),
-	        React.createElement(WeatherDisplay, { weekInfo: this.state.weather })
+	        React.createElement(
+	          'article',
+	          null,
+	          React.createElement(
+	            'h2',
+	            { className: 'heading' },
+	            this.props.heading
+	          ),
+	          React.createElement(WeatherDisplay, { weekInfo: this.state.weather })
+	        )
 	      );
 	    }
 	  }]);
@@ -151,8 +164,12 @@
 	  _createClass(WeatherDisplay, [{
 	    key: 'render',
 	    value: function render() {
-	      debugger;
 	      var weatherInfo = this.props.weekInfo;
+	      var weatherExtremeType = React.createElement(
+	        'p',
+	        { className: 'extremeWeather' },
+	        'WEATHER ALERT'
+	      );
 	      return React.createElement(
 	        'div',
 	        null,
@@ -161,34 +178,49 @@
 	            'article',
 	            { className: 'weather-day', key: weatherDay.date },
 	            React.createElement(
-	              'p',
-	              null,
-	              weatherDay.location
-	            ),
-	            React.createElement(
-	              'p',
-	              null,
-	              weatherDay.temp.high
-	            ),
-	            React.createElement(
-	              'p',
-	              null,
-	              weatherDay.temp.low
-	            ),
-	            React.createElement(
-	              'p',
-	              null,
-	              weatherDay.weatherType.type
-	            ),
-	            React.createElement(
-	              'p',
-	              null,
-	              'chance: ',
-	              Math.round(weatherDay.weatherType.chance * 100),
-	              '%'
+	              'div',
+	              { className: weatherDay.weatherType.type },
+	              React.createElement(
+	                'p',
+	                { className: 'location' },
+	                weatherDay.location
+	              ),
+	              React.createElement(
+	                'p',
+	                { className: 'date' },
+	                weatherDay.date
+	              ),
+	              React.createElement(
+	                'p',
+	                null,
+	                'High: ',
+	                weatherDay.temp.high,
+	                '\xB0 '
+	              ),
+	              React.createElement(
+	                'p',
+	                null,
+	                'Low: ',
+	                weatherDay.temp.low,
+	                '\xB0 '
+	              ),
+	              React.createElement(
+	                'p',
+	                { className: 'weather-type' },
+	                weatherDay.weatherType.type
+	              ),
+	              React.createElement(
+	                'p',
+	                null,
+	                'Chance: ',
+	                Math.round(weatherDay.weatherType.chance * 100),
+	                '%'
+	              ),
+	              React.createElement('p', { className: weatherDay.weatherType.type }),
+	              weatherDay.weatherType.scale === 3 ? weatherExtremeType : null
 	            )
 	          );
-	        }) : null
+	        }).slice(0, 7) : null
 	      );
 	    }
 	  }]);
@@ -196,7 +228,7 @@
 	  return WeatherDisplay;
 	}(React.Component);
 
-	ReactDOM.render(React.createElement(Application, { title: 'Weathrly App', source: 'https://weatherly-api.herokuapp.com/api/weather/' }), document.getElementById('app'));
+	ReactDOM.render(React.createElement(Application, { title: 'Weathrly App', heading: 'Weather Forcast', source: 'https://weatherly-api.herokuapp.com/api/weather/' }), document.getElementById('app'));
 
 	module.exports = Application;
 
@@ -23768,10 +23800,46 @@
 	exports.push([module.id, "@import url(https://fonts.googleapis.com/css?family=Open+Sans);", ""]);
 
 	// module
-	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\n   v2.0 | 20110126\n   License: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\nbody {\n  color: #FFF;\n  background-color: grey;\n  font-family: 'Open Sans', sans-serif; }\n\n#input-form {\n  background-color: #009688;\n  width: 100%;\n  height: 200px;\n  margin: auto;\n  text-align: center;\n  padding-right: 20px; }\n\n.input-field {\n  margin: 20px; }\n\nh1 {\n  background-color: #00695C;\n  width: 100%;\n  height: 55px;\n  padding: 20px;\n  text-align: center;\n  font-size: 50px; }\n\n#weather-display {\n  height: 500px;\n  width: 100%;\n  margin-left: 35%; }\n\n#city {\n  margin-top: 3%;\n  margin-bottom: 2%;\n  font-size: 40px;\n  display: inline-block; }\n\n#weather {\n  display: block;\n  font-size: 25px;\n  margin-bottom: 2%; }\n\n#temperature {\n  margin-left: 12%;\n  font-size: 40px; }\n\n.weather-day {\n  display: inline-block;\n  margin: 20px;\n  border: solid 2px white; }\n", ""]);
+	exports.push([module.id, "/* http://meyerweb.com/eric/tools/css/reset/\n   v2.0 | 20110126\n   License: none (public domain)\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n* {\n  text-align: center; }\n\nbody {\n  color: #FFF;\n  background-color: #8e44ad;\n  font-family: 'Open Sans', sans-serif; }\n\n#input-form {\n  background-color: #009688;\n  width: 100%;\n  height: 200px;\n  margin: auto;\n  text-align: center;\n  padding-right: 20px; }\n\ninput {\n  margin-top: 20px;\n  width: 250px;\n  height: 40px;\n  font-size: 20px; }\n\nbutton {\n  width: 75px;\n  height: 40px;\n  font-size: 20px;\n  background-color: #2c3e50;\n  color: white;\n  border: none;\n  margin-left: 20px; }\n\nh1 {\n  background-color: #00695C;\n  width: 100%;\n  height: 55px;\n  padding: 20px;\n  text-align: center;\n  font-size: 50px; }\n\nh2 {\n  padding: 20px;\n  font-size: 30px;\n  width: 300px;\n  margin: auto; }\n\n#weather-display {\n  height: 500px;\n  width: 100%; }\n\n.weather-day {\n  display: inline-block;\n  margin: 20px;\n  border: solid 2px white; }\n\n.windy {\n  background-color: #bdc3c7;\n  padding: 10px; }\n\np.windy {\n  background-image: url(" + __webpack_require__(181) + ");\n  background-repeat: no-repeat;\n  height: 220px;\n  width: 220px; }\n\n.sunny {\n  background-color: #f1c40f;\n  padding: 10px; }\n\np.sunny {\n  background-image: url(" + __webpack_require__(182) + ");\n  background-repeat: no-repeat;\n  height: 220px;\n  width: 220px; }\n\n.rain {\n  background-color: #2980b9;\n  padding: 10px; }\n\np.rain {\n  background-image: url(" + __webpack_require__(183) + ");\n  background-repeat: no-repeat;\n  height: 220px;\n  width: 220px; }\n\n.cloudy {\n  background-color: #7f8c8d;\n  padding: 10px; }\n\np.cloudy {\n  background-image: url(" + __webpack_require__(184) + ");\n  background-repeat: no-repeat;\n  height: 220px;\n  width: 220px; }\n\n.snow {\n  background-color: #ecf0f1;\n  color: #2c3e50;\n  padding: 10px; }\n\np.snow {\n  background-image: url(" + __webpack_require__(185) + ");\n  background-repeat: no-repeat;\n  height: 220px;\n  width: 220px; }\n\n.thunder {\n  background-color: #34495e;\n  padding: 10px; }\n\np.thunder {\n  background-image: url(" + __webpack_require__(186) + ");\n  background-repeat: no-repeat;\n  height: 220px;\n  width: 220px; }\n\n.location {\n  margin-bottom: 10px;\n  text-transform: uppercase; }\n\n.weather-type {\n  text-transform: capitalize;\n  margin-top: 5px; }\n", ""]);
 
 	// exports
 
+
+/***/ },
+/* 181 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "d1a2f23afb3193fa926def1a2658c7a4.svg";
+
+/***/ },
+/* 182 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "15276f22b62a7d75d8358ee684b33834.svg";
+
+/***/ },
+/* 183 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "3bd36a99345532fc43fe27ceda47f401.svg";
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "57501791cc699c309d25b4cbca4b8ee9.svg";
+
+/***/ },
+/* 185 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "57d8b27fc87a7633e4f9d60e1067b625.svg";
+
+/***/ },
+/* 186 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__.p + "aa3443af21fd7b7432012c711183854f.svg";
 
 /***/ }
 /******/ ]);
