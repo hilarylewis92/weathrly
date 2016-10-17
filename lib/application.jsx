@@ -60,7 +60,7 @@ class WeatherDisplay extends React.Component {
     return(
       <div>
       {
-        weatherInfo.length-1 ? weatherInfo.map(weatherDay=>{
+        weatherInfo.length ? weatherInfo.map(weatherDay=>{
           return (
             <article className="weather-day" key={weatherDay.date}>
                 <div className={weatherDay.weatherType.type}>
@@ -74,7 +74,7 @@ class WeatherDisplay extends React.Component {
               </div>
             </article>
           )
-        })
+        }).slice(0,7)
         : null}
       </div>
     );
