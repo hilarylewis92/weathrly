@@ -82,7 +82,8 @@ h2{
 }
 
 article.rain {
-  background-image: url('../images/rain.png');
+  background: url('../images/rain.png');
+  background-repeat: no-repeat;
   height: 50px;
   width: 50px;
 }
