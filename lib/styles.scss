@@ -70,6 +70,13 @@ h2{
   padding: 10px;
 }
 
+p.windy {
+  background-image: url('../images/windy.svg');
+  background-repeat: no-repeat;
+  height: 220px;
+  width: 220px;
+}
+
 .sunny{
   background-color: $sunny-color;
   padding: 10px;
@@ -87,11 +94,25 @@ p.sunny {
   padding: 10px;
 }
 
+p.rain {
+  background-image: url('../images/rain.svg');
+  background-repeat: no-repeat;
+  height: 220px;
+  width: 220px;
+}
 
 .cloudy{
   background-color: $cloudy-color;
   padding: 10px;
 }
+
+p.cloudy {
+  background-image: url('../images/cloudy.svg');
+  background-repeat: no-repeat;
+  height: 220px;
+  width: 220px;
+}
+
 
 .snow {
   background-color: $snow-color;
@@ -99,9 +120,23 @@ p.sunny {
   padding: 10px;
 }
 
+p.snow {
+  background-image: url('../images/snow.svg');
+  background-repeat: no-repeat;
+  height: 220px;
+  width: 220px;
+}
+
 .thunder {
   background-color: $thunder-color;
   padding: 10px;
+}
+
+p.thunder {
+  background-image: url('../images/thunder.svg');
+  background-repeat: no-repeat;
+  height: 220px;
+  width: 220px;
 }
 
 .location {

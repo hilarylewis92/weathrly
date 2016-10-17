@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="203px" height="150px" viewBox="0 0 203 150" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>Cloudy</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="81" height="81" rx="4"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="-1" y="-1" width="83" height="83">
+            <rect x="-1" y="-1" width="83" height="83" fill="white"></rect>
+            <use xlink:href="#path-1" fill="black"></use>
+        </mask>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Cloudy" transform="translate(1.000000, 1.000000)">
+            <g id="bg" stroke-opacity="0.01" stroke="#FFFFFF" stroke-width="2">
+                <use id="Rectangle-68" mask="url(#mask-2)" xlink:href="#path-1"></use>
+            </g>
+            <g id="icon" transform="translate(34.000000, 45.000000)" fill="#FFFFFF">
+                <g id="cloud-/-normal">
+                    <path d="M101.394795,103.333333 L36.3063063,103.333333 C16.254887,103.333333 0,87.0784463 0,67.027027 C0,46.9756077 16.254887,30.7207207 36.3063063,30.7207207 C42.3571912,30.7207207 48.0623481,32.2009586 53.0794176,34.819075 C60.065298,14.5564209 79.3012003,0 101.936937,0 C130.471649,0 153.603604,23.1319546 153.603604,51.6666667 C153.603604,52.2514893 153.593887,52.8340425 153.574606,53.4141737 C161.904202,57.8892085 167.567568,66.6841301 167.567568,76.8018018 C167.567568,91.4547621 155.688996,103.333333 141.036036,103.333333 L101.936937,103.333333 C101.855376,103.333318 101.394795,103.333333 101.394795,103.333333 L101.936937,103.333333 L101.394795,103.333333 Z" id="Oval-4"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
