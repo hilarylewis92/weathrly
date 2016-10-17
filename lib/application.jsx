@@ -41,7 +41,9 @@ componentDidMount() {
           <input className="input-field" type="text" placeholder="Enter Location" value={this.state.location} onChange={(e)=>this.updateInputValueInState(e)}/>
           <button id="submit-btn" children="submit" onClick={this.getAPIData.bind(this)} />
         </article>
+        <article> <h2> Weekly Forecast</h2>
         <WeatherDisplay weekInfo={this.state.weather} />
+        </article>
       </section>
     );
   }
@@ -55,12 +57,14 @@ class WeatherDisplay extends React.Component {
       {
         weatherInfo.length ? weatherInfo.map(weatherDay=>{
           return (
-            <article key={weatherDay.date}>
-              <p>{weatherDay.location}</p>
-              <p>{weatherDay.temp.high}</p>
-              <p>{weatherDay.temp.low}</p>
-              <p>{weatherDay.weatherType.type}</p>
-              <p>chance: {Math.round(weatherDay.weatherType.chance*100)}%</p>
+            <article className="weather-day" key={weatherDay.date}>
+                  <div className={weatherDay.weatherType.type}>
+                  <p className="location">{weatherDay.location}</p>
+                  <p>High: {weatherDay.temp.high}&deg; </p>
+                  <p>Low: {weatherDay.temp.low}&deg; </p>
+                  <p className="weather-type">{weatherDay.weatherType.type}</p>
+                  <p>Chance: {Math.round(weatherDay.weatherType.chance*100)}%</p>
+              </div>
             </article>
           )
         })
