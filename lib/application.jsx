@@ -57,6 +57,7 @@ componentDidMount() {
 class WeatherDisplay extends React.Component {
   render(){
     let weatherInfo = this.props.weekInfo
+    let weatherExtremeType = <p className='extremeWeather'>WEATHER ALERT</p>;
     return(
       <div>
       {
@@ -71,6 +72,8 @@ class WeatherDisplay extends React.Component {
                   <p className="weather-type">{weatherDay.weatherType.type}</p>
                   <p>Chance: {Math.round(weatherDay.weatherType.chance*100)}%</p>
                   <p className={weatherDay.weatherType.type}></p>
+                  {weatherDay.weatherType.scale === 3 ? weatherExtremeType : null }
+
               </div>
             </article>
           )
@@ -80,6 +83,9 @@ class WeatherDisplay extends React.Component {
     );
   }
 }
+
+
+
 
 ReactDOM.render(<Application title='Weathrly App' heading='Weather Forcast' source='https://weatherly-api.herokuapp.com/api/weather/'/>, document.getElementById('app'));
 
