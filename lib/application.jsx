@@ -66,7 +66,7 @@ class WeatherDisplay extends React.Component {
                   <p>Low: {weatherDay.temp.low}&deg; </p>
                   <p className="weather-type">{weatherDay.weatherType.type}</p>
                   <p>Chance: {Math.round(weatherDay.weatherType.chance*100)}%</p>
-]              </div>
+              </div>
             </article>
           )
         })
