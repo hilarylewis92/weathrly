@@ -2,6 +2,10 @@
 @import 'variables.scss';
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
+*{
+  text-align: center;
+}
+
 body {
   color: $primary-text-color;
   background-color: #8e44ad;
@@ -71,9 +75,16 @@ h2{
   padding: 10px;
 }
 
+
 .rain {
   background-color: $rain-color;
   padding: 10px;
+}
+
+article.rain {
+  background-image: url('../images/rain.png');
+  height: 50px;
+  width: 50px;
 }
 
 .cloudy{
