@@ -26,12 +26,16 @@ componentDidMount() {
    }
 
   getAPIData(){
-    $.get(this.props.source + this.state.location, function(data){
-      console.log(data);
-      this.setState({
-        weather: data,
-      },localStorage.setItem('key', JSON.stringify(data)));
-    }.bind(this));
+    if(this.state.location === 'denver' || this.state.location === 'san-diego' || this.state.location === 'san-fransico' || this.state.location === 'castle-rock'){
+      $.get(this.props.source + this.state.location, function(data){
+        console.log(data);
+        this.setState({
+          weather: data,
+        },localStorage.setItem('key', JSON.stringify(data)));
+      }.bind(this));
+    }else{
+      alert('This is not a valid location. Please enter one of the following locations: (denver, san-diego, san-fransico, or castle-rock)');
+    }
   }
   render(){
     return (
