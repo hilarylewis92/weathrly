@@ -75,9 +75,16 @@ h2{
   padding: 10px;
 }
 
+
 .rain {
   background-color: $rain-color;
   padding: 10px;
+}
+
+.image .rain {
+  background-image: url('../images/HeavyRain.png');
+  height: 30px;
+  width: 30px;
 }
 
 .cloudy{

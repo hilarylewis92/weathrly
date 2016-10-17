@@ -56,7 +56,7 @@ class WeatherDisplay extends React.Component {
     return(
       <div>
       {
-        weatherInfo.length ? weatherInfo.map(weatherDay=>{
+        weatherInfo.length-1 ? weatherInfo.map(weatherDay=>{
           return (
             <article className="weather-day" key={weatherDay.date}>
                 <div className={weatherDay.weatherType.type}>
@@ -66,6 +66,9 @@ class WeatherDisplay extends React.Component {
                   <p>Low: {weatherDay.temp.low}&deg; </p>
                   <p className="weather-type">{weatherDay.weatherType.type}</p>
                   <p>Chance: {Math.round(weatherDay.weatherType.chance*100)}%</p>
+                  <div className='image'>
+                    <img src='#' className={weatherDay.weatherType.type}/>
+                  </div>
               </div>
             </article>
           )
