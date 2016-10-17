@@ -75,17 +75,18 @@ h2{
   padding: 10px;
 }
 
+p.sunny {
+  background-image: url('../images/sunny.svg');
+  background-repeat: no-repeat;
+  height: 220px;
+  width: 220px;
+}
 
 .rain {
   background-color: $rain-color;
   padding: 10px;
 }
 
-article.rain {
-  background-image: url('../images/rain.png');
-  height: 50px;
-  width: 50px;
-}
 
 .cloudy{
   background-color: $cloudy-color;
