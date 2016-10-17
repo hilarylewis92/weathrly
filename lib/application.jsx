@@ -41,8 +41,9 @@ componentDidMount() {
           <input className="input-field" type="text" placeholder="Enter Location" value={this.state.location} onChange={(e)=>this.updateInputValueInState(e)}/>
           <button id="submit-btn" children="submit" onClick={this.getAPIData.bind(this)} />
         </article>
-        <article> <h2> Weekly Forecast</h2>
-        <WeatherDisplay weekInfo={this.state.weather} />
+        <article>
+          <h2 className="heading">{this.props.heading}</h2>
+          <WeatherDisplay weekInfo={this.state.weather} />
         </article>
       </section>
     );
@@ -65,7 +66,7 @@ class WeatherDisplay extends React.Component {
                   <p>Low: {weatherDay.temp.low}&deg; </p>
                   <p className="weather-type">{weatherDay.weatherType.type}</p>
                   <p>Chance: {Math.round(weatherDay.weatherType.chance*100)}%</p>
-              </div>
+]              </div>
             </article>
           )
         })
@@ -75,6 +76,6 @@ class WeatherDisplay extends React.Component {
   }
 }
 
-ReactDOM.render(<Application title='Weathrly App' source='https://weatherly-api.herokuapp.com/api/weather/'/>, document.getElementById('app'));
+ReactDOM.render(<Application title='Weathrly App' heading='Weather Forcast' source='https://weatherly-api.herokuapp.com/api/weather/'/>, document.getElementById('app'));
 
 module.exports = Application
