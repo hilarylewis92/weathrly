@@ -58,8 +58,9 @@ class WeatherDisplay extends React.Component {
         weatherInfo.length ? weatherInfo.map(weatherDay=>{
           return (
             <article className="weather-day" key={weatherDay.date}>
-                  <div className={weatherDay.weatherType.type}>
+                <div className={weatherDay.weatherType.type}>
                   <p className="location">{weatherDay.location}</p>
+                  <p className="date">{weatherDay.date}</p>
                   <p>High: {weatherDay.temp.high}&deg; </p>
                   <p>Low: {weatherDay.temp.low}&deg; </p>
                   <p className="weather-type">{weatherDay.weatherType.type}</p>
