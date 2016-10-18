@@ -27,6 +27,7 @@ componentDidMount() {
 
   getAPIData(){
     if(this.state.location === 'denver' || this.state.location === 'san-diego' || this.state.location === 'san-fransico' || this.state.location === 'castle-rock'){
+      console.log('here');
       $.get(this.props.source + this.state.location, function(data){
         console.log(data);
         this.setState({
@@ -73,7 +74,6 @@ class WeatherDisplay extends React.Component {
                   <p>Chance: {Math.round(weatherDay.weatherType.chance*100)}%</p>
                   <p className={weatherDay.weatherType.type}></p>
                   {weatherDay.weatherType.scale === 3 ? weatherExtremeType : null }
-
               </div>
             </article>
           )
@@ -83,9 +83,6 @@ class WeatherDisplay extends React.Component {
     );
   }
 }
-
-
-
 
 ReactDOM.render(<Application title='Weathrly App' heading='Weather Forcast' source='https://weatherly-api.herokuapp.com/api/weather/'/>, document.getElementById('app'));
 
