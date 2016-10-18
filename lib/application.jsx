@@ -1,6 +1,7 @@
 const $ = require('jquery');
 const React = require('react');
 const ReactDOM = require('react-dom');
+const LocationForm = require('./location-forms');
 
 
 class Application extends React.Component {
@@ -27,9 +28,7 @@ componentDidMount() {
 
   getAPIData(){
     if(this.state.location === 'denver' || this.state.location === 'san-diego' || this.state.location === 'san-fransico' || this.state.location === 'castle-rock'){
-      console.log('here');
       $.get(this.props.source + this.state.location, function(data){
-        console.log(data);
         this.setState({
           weather: data,
         },localStorage.setItem('key', JSON.stringify(data)));
@@ -43,8 +42,7 @@ componentDidMount() {
       <section>
         <article id="input-form">
           <h1 className="title"> {this.props.title} </h1>
-          <input className="input-field" type="text" placeholder="Enter Location" value={this.state.location} onChange={(e)=>this.updateInputValueInState(e)}/>
-          <button id="submit-btn" children="submit" onClick={this.getAPIData.bind(this)} />
+          <LocationForm location={this.state.location} onLocationChange={this.updateInputValueInState.bind(this)} onLocationSubmit={this.getAPIData.bind(this)}/>
         </article>
         <article>
           <h2 className="heading">{this.props.heading}</h2>
@@ -55,33 +53,50 @@ componentDidMount() {
   }
 }
 
+
 class WeatherDisplay extends React.Component {
   render(){
     let weatherInfo = this.props.weekInfo
-    let weatherExtremeType = <p className='extremeWeather'>WEATHER ALERT</p>;
     return(
       <div>
       {
         weatherInfo.length ? weatherInfo.map(weatherDay=>{
           return (
-            <article className="weather-day" key={weatherDay.date}>
-                <div className={weatherDay.weatherType.type}>
-                  <p className="location">{weatherDay.location}</p>
-                  <p className="date">{weatherDay.date}</p>
-                  <p>High: {weatherDay.temp.high}&deg; </p>
-                  <p>Low: {weatherDay.temp.low}&deg; </p>
-                  <p className="weather-type">{weatherDay.weatherType.type}</p>
-                  <p>Chance: {Math.round(weatherDay.weatherType.chance*100)}%</p>
-                  <p className={weatherDay.weatherType.type}></p>
-                  {weatherDay.weatherType.scale === 3 ? weatherExtremeType : null }
-              </div>
-            </article>
+            <WeatherDay
+              type={weatherDay.weatherType.type}
+              location={weatherDay.location}
+              date={weatherDay.date}
+              tempHigh={weatherDay.temp.high}
+              tempLow={weatherDay.temp.low}
+              chance={weatherDay.weatherType.chance}
+              scale={weatherDay.weatherType.scale}
+            />
           )
         }).slice(0, 7)
         : null}
       </div>
     );
   }
+}
+
+class WeatherDay extends React.Component{
+ render(){
+   let weatherExtremeType = <p className='extremeWeather'>WEATHER ALERT</p>;
+   return(
+     <article className="weather-day" key={this.props.date}>
+         <div className={this.props.type}>
+           <p className="location">{this.props.location}</p>
+           <p className="date">{this.props.date}</p>
+           <p>High: {this.props.tempHigh}&deg; </p>
+           <p>Low: {this.props.tempLow}&deg; </p>
+           <p className="weather-type">{this.props.type}</p>
+           <p>Chance: {Math.round(this.props.chance*100)}%</p>
+           <p className={this.props.type}></p>
+           {this.props.scale === 3 ? weatherExtremeType : null }
+       </div>
+     </article>
+   )
+ }
 }
 
 ReactDOM.render(<Application title='Weathrly App' heading='Weather Forcast' source='https://weatherly-api.herokuapp.com/api/weather/'/>, document.getElementById('app'));
