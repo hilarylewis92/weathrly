@@ -2,6 +2,9 @@ const $ = require('jquery');
 const React = require('react');
 const ReactDOM = require('react-dom');
 const LocationForm = require('./location-forms');
+const WeatherDay = require('./weather-day');
+const WeatherDisplay = require('./weather-display');
+
 
 
 class Application extends React.Component {
@@ -51,52 +54,6 @@ componentDidMount() {
       </section>
     );
   }
-}
-
-
-class WeatherDisplay extends React.Component {
-  render(){
-    let weatherInfo = this.props.weekInfo
-    return(
-      <div>
-      {
-        weatherInfo.length ? weatherInfo.map(weatherDay=>{
-          return (
-            <WeatherDay
-              type={weatherDay.weatherType.type}
-              location={weatherDay.location}
-              date={weatherDay.date}
-              tempHigh={weatherDay.temp.high}
-              tempLow={weatherDay.temp.low}
-              chance={weatherDay.weatherType.chance}
-              scale={weatherDay.weatherType.scale}
-            />
-          )
-        }).slice(0, 7)
-        : null}
-      </div>
-    );
-  }
-}
-
-class WeatherDay extends React.Component{
- render(){
-   let weatherExtremeType = <p className='extremeWeather'>WEATHER ALERT</p>;
-   return(
-     <article className="weather-day" key={this.props.date}>
-         <div className={this.props.type}>
-           <p className="location">{this.props.location}</p>
-           <p className="date">{this.props.date}</p>
-           <p>High: {this.props.tempHigh}&deg; </p>
-           <p>Low: {this.props.tempLow}&deg; </p>
-           <p className="weather-type">{this.props.type}</p>
-           <p>Chance: {Math.round(this.props.chance*100)}%</p>
-           <p className={this.props.type}></p>
-           {this.props.scale === 3 ? weatherExtremeType : null }
-       </div>
-     </article>
-   )
- }
 }
 
 ReactDOM.render(<Application title='Weathrly App' heading='Weather Forcast' source='https://weatherly-api.herokuapp.com/api/weather/'/>, document.getElementById('app'));
